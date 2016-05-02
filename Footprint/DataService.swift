@@ -11,7 +11,7 @@ import Firebase
 
 
 
-let URL_BASE = "https://iosfootprint.firebaseio.com"
+let URL_BASE = "https://iosfootprint-dev.firebaseio.com"
 
 class DataService {
     
