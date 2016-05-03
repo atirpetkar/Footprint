@@ -33,6 +33,8 @@
 		847C5A771CD6956E00AFBF61 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 847C5A761CD6956E00AFBF61 /* profile.png */; };
 		847C5A791CD6C31900AFBF61 /* FeedTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C5A781CD6C31900AFBF61 /* FeedTableVC.swift */; };
 		847C5A7B1CD6C39400AFBF61 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C5A7A1CD6C39400AFBF61 /* PostCell.swift */; };
+		847C5A7D1CD6FF8500AFBF61 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C5A7C1CD6FF8500AFBF61 /* Post.swift */; };
+		84D1A4B21CD8240000DB8F35 /* UploadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1A4B11CD8240000DB8F35 /* UploadVC.swift */; };
 		9BD4799D50DFA56EE5C12187 /* Pods_Footprint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03CD6D0F65064B5ED5717CCD /* Pods_Footprint.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +68,8 @@
 		847C5A761CD6956E00AFBF61 /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile.png; sourceTree = "<group>"; };
 		847C5A781CD6C31900AFBF61 /* FeedTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableVC.swift; sourceTree = "<group>"; };
 		847C5A7A1CD6C39400AFBF61 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		847C5A7C1CD6FF8500AFBF61 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		84D1A4B11CD8240000DB8F35 /* UploadVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadVC.swift; sourceTree = "<group>"; };
 		993DA0048A2E1428705FE253 /* Pods-Footprint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Footprint.release.xcconfig"; path = "Pods/Target Support Files/Pods-Footprint/Pods-Footprint.release.xcconfig"; sourceTree = "<group>"; };
 		BA9F72EFF67C3B11E585E573 /* Pods-Footprint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Footprint.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Footprint/Pods-Footprint.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,7 +136,6 @@
 				841664C31CD2E5FD00F73380 /* LaunchScreen.storyboard */,
 				841664C11CD2E5FD00F73380 /* Assets.xcassets */,
 				841664C61CD2E5FD00F73380 /* Info.plist */,
-				847C5A601CD45A9900AFBF61 /* SignUpVC.swift */,
 			);
 			path = Footprint;
 			sourceTree = "<group>";
@@ -171,8 +174,10 @@
 		841664DC1CD2FF5C00F73380 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				847C5A601CD45A9900AFBF61 /* SignUpVC.swift */,
 				841664BC1CD2E5FD00F73380 /* ViewController.swift */,
 				847C5A781CD6C31900AFBF61 /* FeedTableVC.swift */,
+				84D1A4B11CD8240000DB8F35 /* UploadVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -180,6 +185,7 @@
 		841664DD1CD2FF6800F73380 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				847C5A7C1CD6FF8500AFBF61 /* Post.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -344,11 +350,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				847C5A611CD45A9900AFBF61 /* SignUpVC.swift in Sources */,
+				847C5A7D1CD6FF8500AFBF61 /* Post.swift in Sources */,
 				841664E61CD3076800F73380 /* MaterialTextField.swift in Sources */,
 				847C5A5F1CD4332300AFBF61 /* DataService.swift in Sources */,
 				841664DF1CD2FFAA00F73380 /* MaterialView.swift in Sources */,
 				847C5A791CD6C31900AFBF61 /* FeedTableVC.swift in Sources */,
 				841664BD1CD2E5FD00F73380 /* ViewController.swift in Sources */,
+				84D1A4B21CD8240000DB8F35 /* UploadVC.swift in Sources */,
 				841664BB1CD2E5FD00F73380 /* AppDelegate.swift in Sources */,
 				841664E21CD3000800F73380 /* Constants.swift in Sources */,
 				841664E41CD303FB00F73380 /* MaterialButton.swift in Sources */,

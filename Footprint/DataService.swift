@@ -6,6 +6,11 @@
 //  Copyright © 2016 Atir Petkar. All rights reserved.
 //
 
+
+
+//making a singleton class to access Firebase
+
+
 import Foundation
 import Firebase
 
@@ -36,7 +41,17 @@ class DataService {
     }
     
     
+    //so we can have access to anything related to user, in all the view controllers
+    var REF_UID: String = ""
     
+    
+    //still to be seen use of access to post id
+    var REF_POST_FOR_USER : [String] = []
+    
+    func createFirebaseUser(uid: String, user: Dictionary<String, String>){
+        REF_USERS.childByAppendingPath(uid).setValue(user)
+        REF_UID = "\(REF_USERS)/\(uid)"
+    }
     
     
     
