@@ -7,23 +7,26 @@
 //
 
 import Foundation
+import Firebase
 
 class Post {
-    private var _postDescription: String!
-    private var _imageUrl: String!
+    private var _postDescription: String?
+    private var _imageUrl: String?
     private var _likes: Int!
     private var _username: String!
     private var _postKey: String!
+    private var _postRef: Firebase!
     
-    var postDescription: String {
+    var postDescription: String? {
         return _postDescription
     }
     
-    var imageUrl: String {
+    var imageUrl: String? {
         return _imageUrl
     }
     
-    var likes: Int {
+    var likes: Int
+    {
         return _likes
     }
     
@@ -31,8 +34,12 @@ class Post {
         return _username
     }
     
+    var postKey: String {
+        return _postKey
+    }
     
-    init(description: String, imageUrl: String, username: String){
+    
+    init(description: String, imageUrl: String?, username: String){
         
         self._postDescription = description
         self._imageUrl = imageUrl
@@ -57,12 +64,25 @@ class Post {
             self._postDescription = desc
            // print("dexcription from init \(desc)")
         }
+        
+        self._postRef = DataService.ds.REF_POSTS.childByAppendingPath(self._postKey)
+        
     }
     
     
     
-    
-    
+    //if addLike is true, add the likes and vice versa for the user
+    func adjustLikes(addLike: Bool){
+        
+        if addLike {
+            _likes = _likes + 1
+        } else {
+            _likes = _likes - 1
+        }
+        
+        //grabbing the likes key in the specific post
+        _postRef.childByAppendingPath("likes").setValue(_likes)
+    }
     
     
     

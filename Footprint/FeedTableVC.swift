@@ -19,34 +19,126 @@ class FeedTableVC: UITableViewController {
     static var imageCache = NSCache()
     
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         //whenever any new post is added to posts, the below code runs EVERYTIME, unlike viewDidLoad, which runs only once because we have an observer for ".value"
-        DataService.ds.REF_POSTS.observeEventType(.Value, withBlock:{ snapshot in
-           print(snapshot.value)
-          
+        
+        
+        var refs = [Firebase(url:"https://iosfootprint-dev.firebaseio.com/posts"),Firebase(url:"https://iosfootprint-dev.firebaseio.com/posts2")] as! [Firebase]
+        
+        for ref in refs {
+            //set up observers of the type "child added" and "child removed"
+//            ref.observeEventType(.ChildAdded, withBlock: { snapshot in
+//                 print("child added    \(snapshot.value)")
+//                
+//                
+//                //whenever new data comes in, first empty out the existing posts array
+//                //    self.posts = []
+//                
+//                
+//                
+//                
+//                print("SNAP: \(snapshot.value)")
+//                //each snap has values of type dictionary
+//                
+//                if let postDict = snapshot.value as? Dictionary<String, AnyObject> {
+//                    let key = snapshot.key
+//                    let post = Post(postKey: key, dictionary: postDict)
+//                    self.posts.append(post)
+//                    
+//                }
+//                
+//                
+//                
+//                self.tableView.reloadData()
+//            })
             
-            //whenever new data comes in, first empty out the existing posts array
-            self.posts = []
             
-            
-            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot]{
-                for snap in snapshots {
-                    print("SNAP: \(snap)")
-                    //each snap has values of type dictionary
+            DataService.ds.REF_POSTS.observeEventType(.Value, withBlock: { snapshot in
+                
+                if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
                     
-                    if let postDict = snap.value as? Dictionary<String, AnyObject> {
-                        let key = snap.key
-                        let post = Post(postKey: key, dictionary: postDict)
-                        self.posts.append(post)
+                    self.posts = []
                     
+                    for snap in snapshots {
+                        
+                        if let postDict = snap.value as? Dictionary<String, AnyObject>{
+                            let key = snap.key
+                            let post = Post(postKey: key, dictionary: postDict)
+                            self.posts.append(post)
+                        }
+                        
                     }
+                    
+                    self.tableView.reloadData()
+                    
                 }
-            }
+            })
             
-            self.tableView.reloadData()
-        })
+            
+            
+//            
+//            ref.observeEventType(.ChildChanged, withBlock: { snapshot in
+//                print("child changed    \(snapshot.value)")
+//                
+            
+                //whenever new data comes in, first empty out the existing posts array
+                //    self.posts = []
+                
+                
+                
+//                
+//                print("SNAP: \(snapshot.value)")
+//                //each snap has values of type dictionary
+//                
+//                if let postDict = snapshot.value as? Dictionary<String, AnyObject> {
+//                    let key = snapshot.key
+//                    let post = Post(postKey: key, dictionary: postDict)
+//                    
+//                    //first delete the old one
+//                    //added to find the post index of the post to be removed by checking for image
+//                    let index = self.posts.indexOf({$0.imageUrl == (postDict["image"] as! String)})
+//                    //after finding the index, remove it
+//                    //self.posts.removeAtIndex(index!)
+//                    self.posts[index!].likes = ref.childByAppendingPath("posts").childByAppendingPath(key).valueForKey("likes")
+//                    //now add the new one
+//                   // self.posts.append(post)
+//                    
+//                }
+//                
+//                
+//                
+//                self.tableView.reloadData()
+//            })
+//            
+            
+            
+            ref.observeEventType(.ChildRemoved, withBlock: { snapshot in
+                
+                if let postDict = snapshot.value as? Dictionary<String, AnyObject> {
+                    let key = snapshot.key
+                    let post = Post(postKey: key, dictionary: postDict)
+                    //self.posts.append(post)
+                    
+                    
+                    //added to find the post index of the post to be removed by checking for image
+                    let index = self.posts.indexOf({$0.imageUrl == (postDict["image"] as! String)})
+                    //after finding the index, remove it
+                    self.posts.removeAtIndex(index!)
+                }
+                
+                
+                
+                self.tableView.reloadData()
+            })
+
+            
+        }
+        
         
         
        
@@ -82,10 +174,11 @@ class FeedTableVC: UITableViewController {
             var img: UIImage?
             
             //since post image url is not optional
-            let url = post.imageUrl
+            if let url = post.imageUrl {
             //place it in the image cache
-            img = FeedTableVC.imageCache.objectForKey(url) as? UIImage
             
+            img = FeedTableVC.imageCache.objectForKey(url) as? UIImage
+            }
             
             
             cell.configureCell(post, img: img)
